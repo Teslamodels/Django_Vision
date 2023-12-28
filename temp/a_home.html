@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div style="text-align: center;">
+        <br>
+        <h5><a style="text-align: center; text-decoration: none; color: black;" href="http://127.0.0.1:8000/article/new/">New Post</a></h5>
+        <br>
+        <br>
+        {% for article in object_list %}
+            <h2><a style="text-decoration: none; color: darkslateblue;" href="{% url 'detail' article.pk %}">{{ article.title }}</a></h2>
+            <br>
+            {% if article.photo %}
+                <img src="{{ article.photo.url }}" style="border-radius: 10px;" alt="{{ article.title }}" width="300px" height="500px">
+            {% endif %}
+            <p style=" color: cornflowerblue; text-decoration: none; font-family: sans-serif;">{{ article.body | safe }}</p>
+            <h3><a style="text-decoration: none; color: darkslateblue;" href="{% url 'detail' article.pk %}">{{ article.summary }}... more</a></h3>
+            <p style=" color: cornflowerblue; text-decoration: none; font-family: sans-serif;">from {{ article.author }}</p>
+            <p style=" color: cornflowerblue; text-decoration: none; font-family: sans-serif;">{{ article.date }}</p>
+            <br>
+            <br>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
